@@ -4,9 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="libs/bootstrap.css">
     <title>Система управління бібліотекою</title>
 </head>
 <body>
 <!--Past your markup here-->
+    <div class="bg-light d-flex flex-column align-items-center p-3 justify-content-between">
+        <h1 class="fw-bold mb-3">Система управління бібліотекою</h1>
+        <div class="container bg-white shadow p-3 rounded mb-4">
+            <form name="add-book" method="post">
+                <h2 class="fw-bold my-3">Додати книгу</h2>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="book-name" placeholder="Назва книги" required>
+                    <span class="invalid-feedback">Це поле є обов'язковим!</span>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="book-author" placeholder="Автор книги" required>
+                    <span class="invalid-feedback">Це поле є обов'язковим!</span>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="release-year" placeholder="Рік видання" pattern="^\d{1,4}$" required>
+                    <span class="invalid-feedback">Це поле є обов'язковим!</span>
+                </div>
+                <button class="btn btn-success mb-3" type="submit">Додати книгу</button>
+            </form>
+        </div>
+        <div class="container bg-white shadow p-3 rounded mb-4">
+            <form name="add-user" method="post">
+                <h2 class="fw-bold my-3">Додати користувача</h2>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="user-name" placeholder="Ім'я" required>
+                    <span class="invalid-feedback">Це поле є обов'язковим!</span>
+                </div>
+                <div class="mb-3">
+                    <input type="email" class="form-control" name="user-email" placeholder="Email" required>
+                    <span class="invalid-feedback">Це поле є обов'язковим!</span>
+                </div>
+                <button class="btn btn-success mb-3" type="submit">Додати користувача</button>
+            </form>
+        </div>
+        <div class="container bg-white shadow p-3 rounded mb-4">
+            <h2 class="fw-bold my-3">Список книг</h2>
+            <div id="book-list" class="mb-3"></div>
+        </div>
+        <div class="container bg-white shadow p-3 rounded mb-4">
+            <h2 class="fw-bold my-3">Список користувачів</h2>
+            <div id="user-list" class="mb-3"></div>
+        </div>
+    </div>
 </body>
 </html>
