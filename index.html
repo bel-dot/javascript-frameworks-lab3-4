@@ -15,32 +15,32 @@
             <form name="add-book" method="post">
                 <h2 class="fw-bold my-3">Додати книгу</h2>
                 <div class="mb-3">
-                    <input type="text" class="form-control" name="book-name" placeholder="Назва книги" required>
+                    <input type="text" class="form-control" name="book-name" placeholder="Назва книги" required tabindex="1">
                     <span class="invalid-feedback">Це поле є обов'язковим!</span>
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" name="book-author" placeholder="Автор книги" required>
+                    <input type="text" class="form-control" name="book-author" placeholder="Автор книги" required tabindex="2">
                     <span class="invalid-feedback">Це поле є обов'язковим!</span>
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" name="release-year" placeholder="Рік видання" pattern="^\d{1,4}$" required>
+                    <input type="text" class="form-control" name="release-year" placeholder="Рік видання" pattern="^\d{1,4}$" required tabindex="3">
                     <span class="invalid-feedback">Це поле є обов'язковим!</span>
                 </div>
-                <button class="btn btn-success mb-3" type="submit">Додати книгу</button>
+                <button class="btn btn-success mb-3" type="submit" tabindex="4">Додати книгу</button>
             </form>
         </div>
         <div class="container bg-white shadow p-3 rounded mb-4">
             <form name="add-user" method="post">
                 <h2 class="fw-bold my-3">Додати користувача</h2>
                 <div class="mb-3">
-                    <input type="text" class="form-control" name="user-name" placeholder="Ім'я" required>
+                    <input type="text" class="form-control" name="user-name" placeholder="Ім'я" required tabindex="5">
                     <span class="invalid-feedback">Це поле є обов'язковим!</span>
                 </div>
                 <div class="mb-3">
-                    <input type="email" class="form-control" name="user-email" placeholder="Email" required>
+                    <input type="email" class="form-control" name="user-email" placeholder="Email" required tabindex="6">
                     <span class="invalid-feedback">Це поле є обов'язковим!</span>
                 </div>
-                <button class="btn btn-success mb-3" type="submit">Додати користувача</button>
+                <button class="btn btn-success mb-3" type="submit" tabindex="7">Додати користувача</button>
             </form>
         </div>
         <div class="container bg-white shadow p-3 rounded mb-4">
