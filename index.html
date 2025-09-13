@@ -37,7 +37,7 @@
                     <span class="invalid-feedback">Це поле є обов'язковим!</span>
                 </div>
                 <div class="mb-3">
-                    <input type="email" class="form-control" name="user-email" placeholder="Email" required tabindex="6">
+                    <input type="email" class="form-control" name="user-email" placeholder="Email" pattern=".+@\w+\.\w+" required tabindex="6">
                     <span class="invalid-feedback">Це поле є обов'язковим!</span>
                 </div>
                 <button class="btn btn-success mb-3" type="submit" tabindex="7">Додати користувача</button>
@@ -50,6 +50,43 @@
         <div class="container bg-white shadow p-3 rounded mb-4">
             <h2 class="fw-bold my-3">Список користувачів</h2>
             <div id="user-list" class="mb-3"></div>
+        </div>
+    </div>
+    <div class="modal" id="borrowModal">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h5 class="modal-title">Введіть ID користувача для позичення книги:</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form name="borrow-form">
+                <div class="modal-body">
+                    <input type="text" class="form-control" pattern="\d+" placeholder="ID" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+                    <button type="submit" class="btn-primary">Зберегти</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal" id="borrowedModal">
+        <div class="modal-dialog">
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-primary">
+                    <img src="https://tenor.com/view/пон-pon-понятно-ясно-gif-25633797" alt="Ok" class="w-100 h-50">
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="returnModal">
+        <div class="modal-dialog">
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-primary">Закрити</button>
+            </div>
         </div>
     </div>
 </body>
