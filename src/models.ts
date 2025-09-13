@@ -8,6 +8,7 @@ export class Book implements IBook {
     private name: string;
     private author: string;
     private releaseYear: number;
+    private borrower: string = '';
     
     constructor(name: string, author: string, releaseYear: number) {
         this.name = name;
@@ -25,6 +26,14 @@ export class Book implements IBook {
 
     getReleaseYear(): number {
         return this.releaseYear;
+    }
+    
+    isBorrowed(): boolean {
+        return this.borrower != '';
+    }
+    
+    borrow(borrower: string): void {
+        this.borrower = borrower;
     }
 }
 
