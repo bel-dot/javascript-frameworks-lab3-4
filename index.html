@@ -12,7 +12,7 @@
     <div class="bg-light d-flex flex-column align-items-center p-3 justify-content-between">
         <h1 class="fw-bold mb-3">Система управління бібліотекою</h1>
         <div class="container bg-white shadow p-3 rounded mb-4">
-            <form name="add-book" method="post">
+            <form class="needs-validation" novalidate name="add-book" method="post">
                 <h2 class="fw-bold my-3">Додати книгу</h2>
                 <div class="mb-3">
                     <input type="text" class="form-control" name="book-name" placeholder="Назва книги" required tabindex="1">
@@ -33,7 +33,7 @@
             </form>
         </div>
         <div class="container bg-white shadow p-3 rounded mb-4">
-            <form name="add-user" method="post">
+            <form class="needs-validation" novalidate name="add-user" method="post">
                 <h2 class="fw-bold my-3">Додати користувача</h2>
                 <div class="mb-3">
                     <input type="text" class="form-control" name="user-name" placeholder="Ім'я" required tabindex="5">
@@ -63,7 +63,7 @@
                 <h5 class="modal-title">Введіть ID користувача для позичення книги:</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form name="borrow-form">
+            <form class="needs-validation" novalidate name="borrow-form">
                 <div class="modal-body">
                     <input type="text" class="form-control" pattern="\d+" placeholder="ID" required>
                 </div>
