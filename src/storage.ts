@@ -3,8 +3,8 @@ export class Storage {
         localStorage.setItem(key, value);
     }
     
-    static get(key: string): void {
-        localStorage.getItem(key);
+    static get(key: string): string | null {
+        return localStorage.getItem(key);
     }
     
     static remove(key: string): void {
