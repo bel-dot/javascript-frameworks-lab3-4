@@ -1,9 +1,5 @@
 export class Library<T> {
     private objects: T[] = [];
-
-    constructor(objects: T[]) {
-        this.objects = objects;
-    }
     
     add(obj: T): void {
         this.objects.push(obj);
