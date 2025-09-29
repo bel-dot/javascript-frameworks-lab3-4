@@ -1,14 +1,14 @@
 export interface IBook {
-    getName(): string,
-    getAuthor(): string,
-    getReleaseYear(): number,
+    name: string,
+    author: string,
+    releaseYear: number
 }
 
 export class Book implements IBook {
-    private name: string;
-    private author: string;
-    private releaseYear: number;
-    private borrower: string = '';
+    name: string;
+    author: string;
+    releaseYear: number;
+    private borrower: number = 0;
     
     constructor(name: string, author: string, releaseYear: number) {
         this.name = name;
@@ -16,37 +16,30 @@ export class Book implements IBook {
         this.releaseYear = releaseYear;
     }
     
-    getName(): string {
-        return this.name;
-    }
-
-    getAuthor(): string {
-        return this.author;
-    }
-
-    getReleaseYear(): number {
-        return this.releaseYear;
-    }
-    
     isBorrowed(): boolean {
-        return this.borrower != '';
+        return this.borrower != 0;
     }
     
-    borrow(borrower: string): void {
-        this.borrower = borrower;
+    borrow(borrowerId: number): void {
+        this.borrower = borrowerId;
+    }
+    
+    return(): void {
+        this.borrower = 0;
     }
 }
 
 export interface IUser {
-    getId(): number,
-    getName(): string,
-    getEmail(): string,
+    id: number,
+    name: string,
+    email: string
 }
 
 export class User implements IUser {
-    private id: number;
-    private name: string;
-    private email: string;
+    id: number;
+    name: string;
+    email: string;
+    private borrowedBooks: Book[] = [];
 
     constructor(id: number, name: string, email: string) {
         this.id = id;
@@ -54,15 +47,22 @@ export class User implements IUser {
         this.email = email;
     }
     
-    getId(): number {
-        return this.id;
+    borrowBook(book: Book): boolean {
+        if(this.borrowedBooks.length > 3 || book.isBorrowed()) {
+            return false;
+        }
+        this.borrowedBooks.push(book);
+        book.borrow(this.id);
+        return true;
     }
     
-    getName(): string {
-        return this.name;
-    }
-    
-    getEmail(): string {
-        return this.email;
+    returnBook(book: Book): boolean {
+        const index = this.borrowedBooks.indexOf(book);
+        if(index != -1) {
+            this.borrowedBooks.splice(index, 1);
+            book.return();
+            return true;
+        }
+        return false;
     }
 }
