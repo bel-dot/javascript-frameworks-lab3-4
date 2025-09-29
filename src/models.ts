@@ -1,14 +1,15 @@
 export interface IBook {
     name: string,
     author: string,
-    releaseYear: number
+    releaseYear: number,
+    borrower: number,
 }
 
 export class Book implements IBook {
     name: string;
     author: string;
     releaseYear: number;
-    private borrower: number = 0;
+    borrower: number = 0;
     
     constructor(name: string, author: string, releaseYear: number) {
         this.name = name;
