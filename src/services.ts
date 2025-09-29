@@ -1,4 +1,4 @@
-import {Book, User, IBook, IUser} from './models';
+import {Book, User} from './models';
 import {Library} from './library';
 import { Storage } from './storage';
 
@@ -14,15 +14,24 @@ export class LibraryService {
     }
     
     constructor() {
-        const storageBooks = Storage.get('books');
-        const storageUsers = Storage.get('users');
+        const storageBooks = JSON.parse(Storage.get('books') ?? '[]') as Book[];
+        const storageUsers = JSON.parse(Storage.get('users') ?? '[]') as User[];
         
-        this._books = new Library<Book>(JSON.parse(storageBooks ?? '[]'));
-        this._users = new Library<User>(JSON.parse(storageUsers ?? '[]'));
+        if(Array.isArray(storageBooks) && Array.isArray(storageUsers)) {
+            console.log('Data loaded from storage');
+            this._books = new Library<Book>(storageBooks);
+            this._users = new Library<User>(storageUsers);
+        }
+        else {
+            console.log('No data in storage, initializing empty library');
+            Storage.clear();
+            this._books = new Library<Book>();
+            this._users = new Library<User>();
+        }
         
         window.addEventListener('beforeunload', () => {
-            Storage.set('books', JSON.stringify(this._books));
-            Storage.set('users', JSON.stringify(this._users));
+            Storage.set('books', JSON.stringify(this._books.get()));
+            Storage.set('users', JSON.stringify(this._users.get()));
         })
     }
     
@@ -43,18 +52,18 @@ export class LibraryService {
     }
 
     public removeBook(bookName: string): void {
-        this._books.remove(this._books.search(book => book.getName() === bookName));
+        this._books.remove(this._books.search(book => book.name === bookName));
     }
     
     public removeUser(userId: number): void {
-        this._users.remove(this._users.search(user => user.getId() === userId));
+        this._users.remove(this._users.search(user => user.id === userId));
     }
 
     public findBook(bookName: string): Book | undefined {
-        return this._books.search(book => book.getName() === bookName);
+        return this._books.search(book => book.name === bookName);
     }
     
     public findUser(userId: number): User | undefined {
-        return this._users.search(user => user.getId() === userId);
+        return this._users.search(user => user.id === userId);
     }
 }
