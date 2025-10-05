@@ -6,12 +6,16 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack serve --open",
-    "prepare": "husky"
+    "test": "husky"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npx eslint src/**/*.{js,ts}"
-    }
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
   },
   "repository": {
     "type": "git",
