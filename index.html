@@ -58,42 +58,7 @@
             <div id="user-list" class="mb-3 d-flex flex-column"></div>
         </div>
     </div>
-    <div class="modal" id="borrowModal">
-        <div class="modal-dialog">
-            <div class="modal-header">
-                <h5 class="modal-title">Введіть ID користувача для позичення книги:</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form class="needs-validation" novalidate name="borrow-form">
-                <div class="modal-body">
-                    <input type="text" class="form-control" pattern="\d+" placeholder="ID" required>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-secondary" data-bs-dismiss="modal">Скасувати</button>
-                    <button type="submit" class="btn-primary">Зберегти</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="modal" id="borrowedModal">
-        <div class="modal-dialog">
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-primary">
-                    <img src="https://www.reddit.com/media?url=https%3A%2F%2Fpreview.redd.it%2Fmeaning-of-%25D0%25BF%25D0%25BE%25D0%25BD-v0-pnkdyducw5zc1.jpeg%3Fwidth%3D600%26auto%3Dwebp%26s%3D699065bbe24c10796c5abc51fbed5420aa966730" alt="Ok" class="w-100 h-50">
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="modal" id="returnModal">
-        <div class="modal-dialog">
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-primary">Закрити</button>
-            </div>
-        </div>
+    <div class="modal fade" aria-hidden="true" tab-index="-1">
     </div>
     <script src="bundle.js"></script>
 </body>
