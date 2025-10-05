@@ -294,5 +294,5 @@ class App {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const app = new App();
+    new App();
 });
