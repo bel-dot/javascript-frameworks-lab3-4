@@ -21,6 +21,13 @@ export class Library<T> {
         }
     }
     
+    update(oldObj: T | undefined, newObj: T): void {
+        if(oldObj != undefined) {
+            const index = this._objects.indexOf(oldObj);
+            this._objects[index] = newObj;
+        }
+    }
+    
     search(predicate: (obj: T) => boolean): T | undefined {
         return this._objects.find(predicate);
     }
