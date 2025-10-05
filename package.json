@@ -9,7 +9,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "npx eslint src/**/*.{js,ts} && npx prettier --write src/**/*.{js,ts} && git add src/**/*.{js,ts} -A"
+            "pre-commit": "npx eslint src/**/*.{js,ts}"
         }
     },
     "repository": {
