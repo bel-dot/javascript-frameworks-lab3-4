@@ -58,6 +58,16 @@ export class LibraryService {
     public removeUser(userId: number): void {
         this._users.remove(this._users.search(user => user.id === userId));
     }
+    
+    public updateBook(oldBookId: number, newBook: Book): void {
+        const oldBook = this._books.search(book => book.id === oldBookId);
+        this._books.update(oldBook, newBook);
+    }
+    
+    public updateUser(oldUserId: number, newUser: User): void {
+        const oldUser = this._users.search(user => user.id === oldUserId);
+        this._users.update(oldUser, newUser);
+    }
 
     public findBook(bookName: string): Book | undefined {
         return this._books.search(book => book.name === bookName);
