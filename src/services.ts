@@ -52,28 +52,28 @@ export class LibraryService {
     }
 
     public removeBook(bookName: string): void {
-        this._books.remove(this._books.search(book => book.name === bookName));
+        this._books.remove(this._books.search(book => book.getName === bookName));
     }
     
     public removeUser(userId: number): void {
-        this._users.remove(this._users.search(user => user.id === userId));
+        this._users.remove(this._users.search(user => user.getId === userId));
     }
     
     public updateBook(oldBookId: number, newBook: Book): void {
-        const oldBook = this._books.search(book => book.id === oldBookId);
+        const oldBook = this._books.search(book => book.getId === oldBookId);
         this._books.update(oldBook, newBook);
     }
     
     public updateUser(oldUserId: number, newUser: User): void {
-        const oldUser = this._users.search(user => user.id === oldUserId);
+        const oldUser = this._users.search(user => user.getId === oldUserId);
         this._users.update(oldUser, newUser);
     }
 
     public findBook(bookName: string): Book | undefined {
-        return this._books.search(book => book.name === bookName);
+        return this._books.search(book => book.getName === bookName);
     }
     
     public findUser(userId: number): User | undefined {
-        return this._users.search(user => user.id === userId);
+        return this._users.search(user => user.getId === userId);
     }
 }
