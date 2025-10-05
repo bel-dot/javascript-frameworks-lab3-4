@@ -7,6 +7,11 @@
         "build": "webpack",
         "start": "webpack serve --open"
     },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npx eslint src/**/*.{js,ts} --fix && npx prettier --write src/**/*.{js,ts} && git add src/**/*.{js,ts} -A"
+        }
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/bel-dot/javascript-frameworks-lab3-4.git"
@@ -25,5 +30,8 @@
         "webpack": "^5.94.0",
         "webpack-cli": "^5.1.4",
         "webpack-dev-server": "^5.1.0"
+    },
+    "dependencies": {
+        "husky": "^9.1.7"
     }
 }
