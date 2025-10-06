@@ -1,5 +1,4 @@
 export class Modal {
-    private _modal: HTMLDivElement;
     private static _instance: Modal;
 
     public static getInstance(): Modal {
@@ -9,11 +8,13 @@ export class Modal {
     }
 
     constructor() {
-        this._modal = document.querySelector(".modal") as HTMLDivElement;
-        this._modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        const modal = document.querySelector(".modal") as HTMLDivElement;
+        modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     }
 
     public show(message: string): void {
+        const modal = document.querySelector(".modal") as HTMLDivElement;
+
         const modalContent = document.createElement("div");
         modalContent.className = "modal-content";
 
@@ -45,13 +46,15 @@ export class Modal {
 
         modalDialog.appendChild(modalContent);
 
-        this._modal.innerHTML = "";
-        this._modal.appendChild(modalDialog);
+        modal.innerHTML = "";
+        modal.appendChild(modalDialog);
 
         this.appear();
     }
 
-    public askId(handleSubmit: (e: Event) => void): void {
+    public askId(): void {
+        const modal = document.querySelector(".modal") as HTMLDivElement;
+
         const modalDialog = document.createElement("div");
         modalDialog.className = "modal-dialog modal-dialog-centered";
 
@@ -79,7 +82,7 @@ export class Modal {
         borrowForm.className = "needs-validation";
         borrowForm.noValidate = true;
         borrowForm.name = "borrow-form";
-        borrowForm.addEventListener("submit", handleSubmit);
+        borrowForm.id = "borrow-form";
 
         const modalBody = document.createElement("div");
         modalBody.className = "modal-body";
@@ -119,27 +122,31 @@ export class Modal {
 
         modalDialog.appendChild(modalContent);
 
-        this._modal.innerHTML = "";
-        this._modal.appendChild(modalDialog);
+        modal.innerHTML = "";
+        modal.appendChild(modalDialog);
 
         this.appear();
     }
 
     private appear(): void {
-        this._modal.classList.add("show");
+        const modal = document.querySelector(".modal") as HTMLDivElement;
+
+        modal.classList.add("show");
         document.body.classList.add("modal-open");
-        this._modal.style.display = "block";
-        this._modal.ariaHidden = "false";
-        this._modal.ariaModal = "true";
-        this._modal.role = "dialog";
+        modal.style.display = "block";
+        modal.ariaHidden = "false";
+        modal.ariaModal = "true";
+        modal.role = "dialog";
     }
 
     private hide(): void {
-        this._modal.classList.remove("show");
-        this._modal.style.display = "none";
+        const modal = document.querySelector(".modal") as HTMLDivElement;
+
+        modal.classList.remove("show");
+        modal.style.display = "none";
         document.body.classList.remove("modal-open");
-        this._modal.ariaHidden = "true";
-        this._modal.ariaModal = "false";
-        this._modal.role = "";
+        modal.ariaHidden = "true";
+        modal.ariaModal = "false";
+        modal.role = "";
     }
 }
