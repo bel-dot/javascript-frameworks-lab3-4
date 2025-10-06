@@ -83,17 +83,20 @@ export class User implements IUser {
         return this.email;
     }
 
-    public borrowBook(book: Book): void {
+    public borrowBook(book: Book): boolean {
         if (this.borrowedBooks > 3 || book.isBorrowed()) {
-            throw new Error(
-                "Too many books borrowed or book is already borrowed",
-            );
+            return false;
         }
         this.borrowedBooks++;
         book.borrow(this.id);
+        return true;
     }
 
-    public returnBook(): void {
-        this.borrowedBooks--;
+    public returnBook(): boolean {
+        if (this.borrowedBooks > 0) {
+            this.borrowedBooks--;
+            return true;
+        }
+        return false;
     }
 }
