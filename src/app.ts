@@ -83,36 +83,44 @@ class App {
         };
 
         const borrowBook = (book: Book) => {
+            this._modal.askId();
+
             const handleSubmit = (e: Event) => {
                 e.preventDefault();
+                console.log("e");
 
                 const form = e.target as HTMLFormElement;
                 if (this._validation.validateForm(form)) {
                     const userId = parseInt(
                         (form[0] as HTMLInputElement).value,
                     );
-                    const user = this._service
-                        .getUsers()
-                        .find((u) => u.getId === userId) as User;
-                    Object.setPrototypeOf(book, Book.prototype);
-                    Object.setPrototypeOf(user, User.prototype);
+                    const user = this._service.findUser(userId);
+                    if (user) {
+                        Object.setPrototypeOf(book, Book.prototype);
+                        Object.setPrototypeOf(user, User.prototype);
 
-                    if (user && user.borrowBook(book)) {
-                        this._service.updateBook(book.getId, book);
-                        this._service.updateUser(user.getId, user);
-                        this._modal.show(
-                            `${book.getName} by ${book.getAuthor} (${book.getReleaseYear}) успішно позичена користувачем ${user.getId} ${user.getName} (${user.getEmail}).`,
-                        );
-                        this.updateUI();
+                        if (user && user.borrowBook(book)) {
+                            console.log("e");
+                            this._service.updateBook(book.getId, book);
+                            this._service.updateUser(user.getId, user);
+                            this._modal.show(
+                                `${book.getName} by ${book.getAuthor} (${book.getReleaseYear}) успішно позичена користувачем ${user.getId} ${user.getName} (${user.getEmail}).`,
+                            );
+                            this.updateUI();
+                        } else {
+                            console.log("e");
+                            this._modal.show(
+                                `Не вдалося позичити книгу. Можливо, користувач досяг ліміту позичених книг або книга вже позичена.`,
+                            );
+                        }
                     } else {
-                        this._modal.show(
-                            `Не вдалося позичити книгу. Можливо, користувач досяг ліміту позичених книг або книга вже позичена.`,
-                        );
+                        this._modal.show("Не вдалося знайти користувача");
                     }
                 }
             };
 
-            this._modal.askId(handleSubmit);
+            const form = document.getElementById("borrow-form");
+            form?.addEventListener("submit", handleSubmit);
         };
 
         // update the user interface here
