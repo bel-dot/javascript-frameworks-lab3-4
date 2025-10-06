@@ -10,6 +10,7 @@ export class Modal {
 
     constructor() {
         this._modal = document.querySelector(".modal") as HTMLDivElement;
+        this._modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     }
 
     public show(message: string): void {
