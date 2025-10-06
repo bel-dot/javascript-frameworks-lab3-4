@@ -2,7 +2,6 @@
     "name": "lab-3-4",
     "version": "1.0.0",
     "description": "",
-    "type": "module",
     "main": "webpack.config.js",
     "scripts": {
         "build": "webpack",
