@@ -1,4 +1,5 @@
 // import all modules here
+import { Modal } from "./modal";
 import { Book, User } from "./models";
 import { LibraryService } from "./services";
 import { Validation } from "./validation";
@@ -8,13 +9,12 @@ import { Validation } from "./validation";
 class App {
     private _validation: Validation;
     private _service: LibraryService;
-    private modal: HTMLDivElement;
+    private _modal: Modal;
 
     constructor() {
         this._validation = Validation.getInstance();
         this._service = LibraryService.getInstance();
-        this.modal = document.querySelector(".modal") as HTMLDivElement;
-        this.modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        this._modal = Modal.getInstance();
         this.updateUI();
 
         const addBookForm = document.forms.namedItem(
@@ -74,7 +74,7 @@ class App {
                 this._service.updateBook(book.getId, book);
                 this._service.updateUser(user.getId, user);
 
-                this.showPonModal(
+                this._modal.show(
                     `${book.getName} by ${book.getAuthor} (${book.getReleaseYear}) успішно повернена користувачем ${user.getId} ${user.getName} (${user.getEmail}).`,
                 );
                 this.updateUI();
@@ -101,12 +101,12 @@ class App {
                             user.borrowBook(book);
                             this._service.updateBook(book.getId, book);
                             this._service.updateUser(user.getId, user);
-                            this.showPonModal(
+                            this._modal.show(
                                 `${book.getName} by ${book.getAuthor} (${book.getReleaseYear}) успішно позичена користувачем ${user.getId} ${user.getName} (${user.getEmail}).`,
                             );
                             this.updateUI();
                         } catch (error) {
-                            this.showPonModal(
+                            this._modal.show(
                                 `Не вдалося позичити книгу: ${(error as Error).message}`,
                             );
                         }
@@ -114,78 +114,7 @@ class App {
                 }
             };
 
-            const modalDialog = document.createElement("div");
-            modalDialog.className = "modal-dialog modal-dialog-centered";
-
-            const modalContent = document.createElement("div");
-            modalContent.className = "modal-content";
-
-            const modalHeader = document.createElement("div");
-            modalHeader.className = "modal-header";
-
-            const modalTitle = document.createElement("h5");
-            modalTitle.className = "modal-title";
-            modalTitle.textContent =
-                "Введіть ID користувача для позичення книги:";
-
-            const closeButton = document.createElement("button");
-            closeButton.type = "button";
-            closeButton.className = "btn-close";
-            closeButton.setAttribute("data-bs-dismiss", "modal");
-            closeButton.setAttribute("aria-label", "Close");
-            closeButton.addEventListener("click", this.closeModal);
-
-            modalHeader.appendChild(modalTitle);
-            modalHeader.appendChild(closeButton);
-
-            const borrowForm = document.createElement("form");
-            borrowForm.className = "needs-validation";
-            borrowForm.noValidate = true;
-            borrowForm.name = "borrow-form";
-            borrowForm.addEventListener("submit", handleSubmit);
-
-            const modalBody = document.createElement("div");
-            modalBody.className = "modal-body";
-
-            const inputField = document.createElement("input");
-            inputField.type = "text";
-            inputField.className = "form-control";
-            inputField.pattern = "\\d+";
-            inputField.placeholder = "ID";
-            inputField.required = true;
-
-            modalBody.appendChild(inputField);
-
-            const modalFooter = document.createElement("div");
-            modalFooter.className = "modal-footer";
-
-            const cancelButton = document.createElement("button");
-            cancelButton.type = "button";
-            cancelButton.className = "btn btn-secondary";
-            cancelButton.setAttribute("data-bs-dismiss", "modal");
-            cancelButton.textContent = "Скасувати";
-            cancelButton.addEventListener("click", this.closeModal);
-
-            const saveButton = document.createElement("button");
-            saveButton.type = "submit";
-            saveButton.className = "btn btn-primary";
-            saveButton.textContent = "Зберегти";
-
-            modalFooter.appendChild(cancelButton);
-            modalFooter.appendChild(saveButton);
-
-            borrowForm.appendChild(modalBody);
-            borrowForm.appendChild(modalFooter);
-
-            modalContent.appendChild(modalHeader);
-            modalContent.appendChild(borrowForm);
-
-            modalDialog.appendChild(modalContent);
-
-            this.modal.innerHTML = "";
-            this.modal.appendChild(modalDialog);
-
-            this.showModal();
+            this._modal.askId(handleSubmit);
         };
 
         // update the user interface here
@@ -230,66 +159,6 @@ class App {
                 </div>
             `;
         });
-    }
-
-    showModal(): void {
-        const modal = document.querySelector(".modal") as HTMLDivElement;
-
-        modal.classList.add("show");
-        document.body.classList.add("modal-open");
-        modal.style.display = "block";
-        modal.ariaHidden = "false";
-        modal.ariaModal = "true";
-        modal.role = "dialog";
-    }
-
-    showPonModal(message: string): void {
-        const modalContent = document.createElement("div");
-        modalContent.className = "modal-content";
-
-        const modalDialog = document.createElement("div");
-        modalDialog.className = "modal-dialog modal-dialog-centerd";
-
-        const modalBody = document.createElement("div");
-        modalBody.className = "modal-body";
-        modalBody.textContent = message;
-
-        const modalFooter = document.createElement("div");
-        modalFooter.className = "modal-footer";
-
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "btn btn-primary";
-        button.addEventListener("click", this.closeModal);
-
-        const img = document.createElement("img");
-        img.src = "assets/pon.gif";
-        img.alt = "Pon";
-        img.className = "w-100 img-fluid";
-
-        button.appendChild(img);
-        modalFooter.appendChild(button);
-
-        modalContent.appendChild(modalBody);
-        modalContent.appendChild(modalFooter);
-
-        modalDialog.appendChild(modalContent);
-
-        this.modal.innerHTML = "";
-        this.modal.appendChild(modalDialog);
-
-        this.showModal();
-    }
-
-    closeModal(): void {
-        const modal = document.querySelector(".modal") as HTMLDivElement;
-
-        modal.classList.remove("show");
-        modal.style.display = "none";
-        document.body.classList.remove("modal-open");
-        modal.ariaHidden = "true";
-        modal.ariaModal = "false";
-        modal.role = "";
     }
 }
 
