@@ -1,6 +1,5 @@
 {
-  "loader": ["ts-node/esm"],
-  "require": ["jsdom"],
+  "require": ["ts-node/register", "jsdom"],
   "extension": ["ts"],
   "spec": ["test/**/*.ts"]
 }

@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import { describe, it } from "mocha";
 import { JSDOM } from "jsdom";
-import { Validation } from "../src/validation.ts";
+import { Validation } from "../src/validation";
 
 describe("Validation", function () {
     describe("#validateForm()", function () {

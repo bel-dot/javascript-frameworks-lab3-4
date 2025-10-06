@@ -1,6 +1,6 @@
-import { Book, User } from "./models.ts";
-import { Library } from "./library.ts";
-import { Storage } from "./storage.ts";
+import { Book, User } from "./models";
+import { Library } from "./library";
+import { Storage } from "./storage";
 
 export class LibraryService {
     private _books: Library<Book>;

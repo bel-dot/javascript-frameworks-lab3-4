@@ -1,7 +1,7 @@
 // import all modules here
-import { Book, User } from "./models.ts";
-import { LibraryService } from "./services.ts";
-import { Validation } from "./validation.ts";
+import { Book, User } from "./models";
+import { LibraryService } from "./services";
+import { Validation } from "./validation";
 
 // etc.
 

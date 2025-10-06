@@ -1,15 +1,18 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "module": "nodenext",
-        "moduleResolution": "nodenext",
-        "allowImportingTsExtensions": true,
-        "noEmit": true,
+        "module": "es6",
+        "moduleResolution": "node10",
         "removeComments": true,
         "strict": true,
         "esModuleInterop": true,
         "outDir": "./dist",
         "sourceMap": true
+    },
+    "ts-node": {
+        "compilerOptions": {
+            "module": "commonjs"
+        }
     },
     "include": ["src"],
     "exclude": ["node_modules"]

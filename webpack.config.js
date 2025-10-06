@@ -1,6 +1,6 @@
-const path = require("path");
+import * as path from "path";
 
-module.exports = {
+export default {
     entry: "./src/app.ts",
     module: {
         rules: [
@@ -16,12 +16,18 @@ module.exports = {
     },
     output: {
         filename: "bundle.js",
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(
+            path.dirname(new URL(import.meta.url).pathname),
+            "dist",
+        ),
     },
     mode: "development",
     devServer: {
         static: {
-            directory: path.join(__dirname, "/"),
+            directory: path.join(
+                path.dirname(new URL(import.meta.url).pathname),
+                "/",
+            ),
         },
         compress: true,
         port: 9000,
