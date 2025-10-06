@@ -16,7 +16,7 @@ export class Library<T> {
     remove(obj: T | undefined): void {
         if (obj != undefined) {
             const index = this._objects.indexOf(obj);
-
+            if (index === -1) return;
             this._objects.splice(index, 1);
         }
     }
@@ -24,6 +24,7 @@ export class Library<T> {
     update(oldObj: T | undefined, newObj: T): void {
         if (oldObj != undefined) {
             const index = this._objects.indexOf(oldObj);
+            if (index === -1) return;
             this._objects[index] = newObj;
         }
     }

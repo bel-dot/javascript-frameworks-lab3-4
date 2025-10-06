@@ -1,7 +1,10 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "module": "es6",
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
+        "allowImportingTsExtensions": true,
+        "noEmit": true,
         "removeComments": true,
         "strict": true,
         "esModuleInterop": true,

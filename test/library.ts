@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { describe, it } from "mocha";
-import { Library } from "../src/library";
+import { Library } from "../src/library.ts";
 
 describe("Library", function () {
     describe("#remove(obj: T)", function () {
