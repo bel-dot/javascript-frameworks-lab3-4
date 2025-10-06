@@ -67,8 +67,7 @@ class App {
                 .find((u) => u.getId === book.getBorrower) as User;
             Object.setPrototypeOf(book, Book.prototype);
             Object.setPrototypeOf(user, User.prototype);
-            if (user) {
-                user.returnBook();
+            if (user && user.returnBook() && book.isBorrowed()) {
                 book.return();
 
                 this._service.updateBook(book.getId, book);
@@ -78,6 +77,8 @@ class App {
                     `${book.getName} by ${book.getAuthor} (${book.getReleaseYear}) успішно повернена користувачем ${user.getId} ${user.getName} (${user.getEmail}).`,
                 );
                 this.updateUI();
+            } else {
+                this._modal.show(`Не вдалося повернути книгу.`);
             }
         };
 
@@ -96,20 +97,17 @@ class App {
                     Object.setPrototypeOf(book, Book.prototype);
                     Object.setPrototypeOf(user, User.prototype);
 
-                    if (user) {
-                        try {
-                            user.borrowBook(book);
-                            this._service.updateBook(book.getId, book);
-                            this._service.updateUser(user.getId, user);
-                            this._modal.show(
-                                `${book.getName} by ${book.getAuthor} (${book.getReleaseYear}) успішно позичена користувачем ${user.getId} ${user.getName} (${user.getEmail}).`,
-                            );
-                            this.updateUI();
-                        } catch (error) {
-                            this._modal.show(
-                                `Не вдалося позичити книгу: ${(error as Error).message}`,
-                            );
-                        }
+                    if (user && user.borrowBook(book)) {
+                        this._service.updateBook(book.getId, book);
+                        this._service.updateUser(user.getId, user);
+                        this._modal.show(
+                            `${book.getName} by ${book.getAuthor} (${book.getReleaseYear}) успішно позичена користувачем ${user.getId} ${user.getName} (${user.getEmail}).`,
+                        );
+                        this.updateUI();
+                    } else {
+                        this._modal.show(
+                            `Не вдалося позичити книгу. Можливо, користувач досяг ліміту позичених книг або книга вже позичена.`,
+                        );
                     }
                 }
             };
